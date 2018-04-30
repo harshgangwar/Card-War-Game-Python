@@ -1,0 +1,20 @@
+
+
+Algorithm for playing card game (With no war situation) #war situation is when both players have same value/rank
+
+
+1. First make an list of 52 cards by cross joining of 4 suits(H, D, S, C) and 12 ranks(2, 3, 4, 5, 6, 7, 8, 9, 10, J, Q, K, A)
+2. Shuffle the cards 
+3. Divide these 52 cards between 2 players 
+4. While player1_has_cards and player2_has_cards:
+		a) player1 drawn a card (remove first element from the list)
+		b) player2 drawn a card (remove first element from the list)
+		c) compare their ranks (values)
+		d) and add these values to the list of winning player's list
+		e) goto step 4 until either player1' list or player2's list has value(card) in their list(deck) 
+5. Player with all 52 values(cards) is the winner 
+
+
+
+	 
+	
