@@ -1,6 +1,5 @@
-
-
 from random import shuffle
+from time import sleep
 
 suite = 'H D S C'.split()
 ranks = '2 3 4 5 6 7 8 9 10 J Q K A'.split()
@@ -14,10 +13,12 @@ class Deck:
 
     def __init__(self):
         print("Creating New Ordered Deck")
+        sleep(0.5)
         self.allcards = [(s,r) for s in suite for r in ranks ]
 
     def shuffle(self):
         print("Shuffling Deck")
+        sleep(0.5)
         shuffle(self.allcards)
 
     def split_in_half(self):
@@ -72,7 +73,7 @@ class Player:
         """
         return len(self.hand.cards) != 0
 
-print "Let's start the game"
+print ("Let's start the game")
 
 
 # Create New Deck and split in half
@@ -95,6 +96,7 @@ while user.still_has_cards() and comp.still_has_cards():
     print("Here are the current standings: ")
     print(user.name+" count: "+str(len(user.hand.cards)))
     print(comp.name+" count: "+str(len(comp.hand.cards)))
+    sleep(1)
     print("Both players play a card!")
     print('\n')
 
@@ -115,6 +117,7 @@ while user.still_has_cards() and comp.still_has_cards():
         war_count +=1
         print("We have a match, time for war!")
         print("Each player removes 3 cards 'face down' and then one card face up")
+        sleep(0.5)
         table_cards.extend(user.remove_war_cards())
         table_cards.extend(comp.remove_war_cards())
 
@@ -143,5 +146,7 @@ while user.still_has_cards() and comp.still_has_cards():
             print(comp.name+" has the higher card, adding to hand.")
             comp.hand.add(table_cards)
 
+print(user.name+" count: "+str(len(user.hand.cards)))
+print(comp.name+" count: "+str(len(comp.hand.cards)))
 print("Great Game, it lasted: "+str(total_rounds))
 print("A war occured "+str(war_count)+" times.")
