@@ -39,7 +39,8 @@ class Hand:
         self.cards.extend(added_cards)
 
     def remove_card(self):
-        return self.cards.pop()
+        if self.cards:
+            return (self.cards.pop())
 
 
 class Player:
