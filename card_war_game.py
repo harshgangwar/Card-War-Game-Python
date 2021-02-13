@@ -1,6 +1,5 @@
-
-
 from random import shuffle
+from time import sleep
 
 suite = 'H D S C'.split()
 ranks = '2 3 4 5 6 7 8 9 10 J Q K A'.split()
@@ -14,10 +13,12 @@ class Deck:
 
     def __init__(self):
         print("Creating New Ordered Deck")
+        sleep(0.5)
         self.allcards = [(s,r) for s in suite for r in ranks ]
 
     def shuffle(self):
         print("Shuffling Deck")
+        sleep(0.5)
         shuffle(self.allcards)
 
     def split_in_half(self):
@@ -38,7 +39,10 @@ class Hand:
         self.cards.extend(added_cards)
 
     def remove_card(self):
-        return self.cards.pop()
+        if self.cards:
+            return self.cards.pop()
+        else:
+            return None
 
 
 class Player:
@@ -72,7 +76,7 @@ class Player:
         """
         return len(self.hand.cards) != 0
 
-print "Let's start the game"
+print ("Let's start the game")
 
 
 # Create New Deck and split in half
@@ -95,6 +99,7 @@ while user.still_has_cards() and comp.still_has_cards():
     print("Here are the current standings: ")
     print(user.name+" count: "+str(len(user.hand.cards)))
     print(comp.name+" count: "+str(len(comp.hand.cards)))
+    # sleep(2)
     print("Both players play a card!")
     print('\n')
 
@@ -115,12 +120,17 @@ while user.still_has_cards() and comp.still_has_cards():
         war_count +=1
         print("We have a match, time for war!")
         print("Each player removes 3 cards 'face down' and then one card face up")
+        sleep(1)
         table_cards.extend(user.remove_war_cards())
         table_cards.extend(comp.remove_war_cards())
 
         # Play cards
         c_card = comp.play_card()
         p_card = user.play_card()
+
+        if c_card == None or p_card == None:
+            print(comp.name+" has no cards to play" if (c_card == None) else user.name+" has no cards to play")
+            break
 
         # Add to table_cards
         table_cards.append(c_card)
@@ -143,5 +153,8 @@ while user.still_has_cards() and comp.still_has_cards():
             print(comp.name+" has the higher card, adding to hand.")
             comp.hand.add(table_cards)
 
+print("\nHere are the final standings: ")
+print(user.name+" count: "+str(len(user.hand.cards)))
+print(comp.name+" count: "+str(len(comp.hand.cards)))
 print("Great Game, it lasted: "+str(total_rounds))
 print("A war occured "+str(war_count)+" times.")
